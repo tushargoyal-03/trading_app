@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Trading app',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: FirstScreen(),
     );

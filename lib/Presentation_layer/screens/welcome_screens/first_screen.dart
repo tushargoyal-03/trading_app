@@ -6,6 +6,7 @@ import 'package:trading_app/Application_layer/constants/app_images.dart';
 import 'package:trading_app/Application_layer/constants/app_text.dart';
 import 'package:trading_app/Application_layer/constants/common_button.dart';
 import 'package:trading_app/Application_layer/utils/padding.dart';
+import 'package:trading_app/Presentation_layer/screens/dashboard_view/bottom_navigation_screen.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
@@ -78,9 +79,11 @@ class _FirstScreenState extends State<FirstScreen> {
             text("The chart shows price trends of asset - EUR/USD. If the chart goes up, the price rises. If it goes down, the price falls.", textColor: whiteColor, fontSize: 16, isCentered: true),
 
             // Next button
-            Container(
+            SizedBox(
               width: Get.width * .5,
-              child: CustomButton(textHeading: "Next", onTap: (){}, btnColor: buttonColor),
+              child: CustomButton(textHeading: "Next", onTap: (){
+                Get.to(BottomNavigationScreen());
+              }, btnColor: buttonColor),
             )
           ],
         ),
