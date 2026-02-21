@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:trading_app/Application_layer/constants/app_color.dart';
 import 'package:trading_app/Application_layer/constants/app_font.dart';
 import 'package:trading_app/Application_layer/constants/app_images.dart';
 import 'package:trading_app/Application_layer/constants/app_text.dart';
+import 'package:trading_app/Application_layer/constants/common_button.dart';
 import 'package:trading_app/Application_layer/utils/padding.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -73,8 +75,13 @@ class _FirstScreenState extends State<FirstScreen> {
             Image.asset(AppImages.graphImage),
 
             // Trade Text
-            text("The chart shows price trends of asset - EUR/USD. If the chart goes up, the price", textColor: whiteColor, fontSize: 16),
+            text("The chart shows price trends of asset - EUR/USD. If the chart goes up, the price rises. If it goes down, the price falls.", textColor: whiteColor, fontSize: 16, isCentered: true),
 
+            // Next button
+            Container(
+              width: Get.width * .5,
+              child: CustomButton(textHeading: "Next", onTap: (){}, btnColor: buttonColor),
+            )
           ],
         ),
       ),

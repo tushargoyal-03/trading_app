@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: btnColor,
           border: isBorder == true ? Border.all(color: whiteColor, width: 2) : Border.all(color: Colors.transparent),
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(7),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
