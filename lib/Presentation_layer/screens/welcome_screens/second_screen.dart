@@ -1,22 +1,36 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trading_app/Application_layer/constants/app_color.dart';
-import 'package:trading_app/Application_layer/constants/app_font.dart';
-import 'package:trading_app/Application_layer/constants/app_images.dart';
-import 'package:trading_app/Application_layer/constants/app_text.dart';
 import 'package:trading_app/Application_layer/constants/common_button.dart';
-import 'package:trading_app/Application_layer/utils/padding.dart';
-import 'package:trading_app/Presentation_layer/screens/dashboard_screens/bottom_navigation_screen.dart';
-import 'package:trading_app/Presentation_layer/screens/welcome_screens/second_screen.dart';
+import 'package:trading_app/Presentation_layer/screens/welcome_screens/third_screen.dart';
 
-class FirstScreen extends StatefulWidget {
-  const FirstScreen({super.key});
+import '../../../Application_layer/constants/app_color.dart';
+import '../../../Application_layer/constants/app_font.dart';
+import '../../../Application_layer/constants/app_images.dart';
+import '../../../Application_layer/constants/app_text.dart';
+import '../../../Application_layer/utils/padding.dart';
+import '../dashboard_screens/bottom_navigation_screen.dart';
+
+class SecondScreen extends StatefulWidget {
+  const SecondScreen({super.key});
 
   @override
-  State<FirstScreen> createState() => _FirstScreenState();
+  State<SecondScreen> createState() => _SecondScreenState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
+class _SecondScreenState extends State<SecondScreen> {
+
+  // Timer Declaration
+  Timer? timer;
+
+  void startTimer(){
+    timer = Timer(Duration(seconds: 10), (){
+      Get.to(ThirdScreen());
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +50,6 @@ class _FirstScreenState extends State<FirstScreen> {
         padding: AppPadding.screenPadding,
         child: Column(
           children: [
-
             // Skip Button
             InkWell(
               onTap: (){
@@ -67,34 +80,43 @@ class _FirstScreenState extends State<FirstScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.flag, color: whiteColor,),
-                    SizedBox(width: 10,),
-                    text("Skip", textColor: whiteColor, fontSize: 16),
-                    SizedBox(width: 20,),
+                    Icon(Icons.flag, color: whiteColor),
+                    SizedBox(width: 10),
+                    text("EUR/USD", textColor: whiteColor, fontSize: 16),
+                    SizedBox(width: 20),
                     text("80%", textColor: buttonColor),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 40,),
+            SizedBox(height: 40),
 
             // Graph Alignment
             Image.asset(AppImages.graphImage),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
 
             // Trade Text
-            text("The chart shows price trends of asset - EUR/USD. If the chart goes up, the price rises. If it goes down, the price falls.", textColor: whiteColor, fontSize: 16, isCentered: true),
+            text(
+              "You should predict whether the char will rise or fall in one minute and buy up or down according to your prediction. If you have prediction, you'll get 80% profit.",
+              textColor: whiteColor,
+              fontSize: 16,
+              isCentered: true,
+            ),
             SizedBox(height: 20,),
 
-
             // Next button
-            ElevatedButton(
-              onPressed: () {
-                Get.to(() => SecondScreen());
-              },
-              style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
-              child: text("Done", textColor: whiteColor),
+            Row(
+              children: [
+                Expanded(child: CustomButton(textHeading: "Put", onTap: (){
+                  startTimer();
+                }, btnColor: Colors.red, isImage: false, isIcon: true, icon: Icons.arrow_downward,),),
+                SizedBox(width: 10,),
+                Expanded(child: CustomButton(textHeading: "Call", onTap: (){
+                  startTimer();
+                }, btnColor: Colors.green, isImage: false, isIcon: true, icon: Icons.arrow_upward,),)
+              ],
             ),
+
           ],
         ),
       ),

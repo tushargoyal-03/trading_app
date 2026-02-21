@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trading_app/Presentation_layer/screens/dashboard_screens/help_screen.dart';
+import 'package:trading_app/Presentation_layer/screens/dashboard_screens/history_screen.dart';
+import 'package:trading_app/Presentation_layer/screens/dashboard_screens/trade_screen.dart';
 
 import '../../../Application_layer/constants/app_color.dart';
 import '../../../Application_layer/constants/app_font.dart';
 import '../../../Application_layer/constants/app_text.dart';
-import '../profile_view/profile_screen.dart';
+import '../profile_screens/profile_screen.dart';
 import 'home_screen.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
@@ -47,10 +50,10 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             physics: const NeverScrollableScrollPhysics(),
             children:  [
                HomeScreen(),
-               HomeScreen(),
-               HomeScreen(),
-               HomeScreen(),
-              ProfileScreen(),
+               HelpScreen(),
+               TradeScreen(),
+               HistoryScreen(),
+               ProfileScreen(),
             ],
           ),
           bottomNavigationBar: _buildBottomNavigation(),

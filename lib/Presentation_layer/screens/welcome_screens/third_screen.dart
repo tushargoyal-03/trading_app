@@ -1,22 +1,52 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:trading_app/Application_layer/constants/app_color.dart';
-import 'package:trading_app/Application_layer/constants/app_font.dart';
-import 'package:trading_app/Application_layer/constants/app_images.dart';
-import 'package:trading_app/Application_layer/constants/app_text.dart';
-import 'package:trading_app/Application_layer/constants/common_button.dart';
-import 'package:trading_app/Application_layer/utils/padding.dart';
-import 'package:trading_app/Presentation_layer/screens/dashboard_screens/bottom_navigation_screen.dart';
-import 'package:trading_app/Presentation_layer/screens/welcome_screens/second_screen.dart';
+import 'dart:async';
 
-class FirstScreen extends StatefulWidget {
-  const FirstScreen({super.key});
+import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:trading_app/Presentation_layer/screens/welcome_screens/fourth_screen.dart';
+
+import '../../../Application_layer/constants/app_color.dart';
+import '../../../Application_layer/constants/app_font.dart';
+import '../../../Application_layer/constants/app_images.dart';
+import '../../../Application_layer/constants/app_text.dart';
+import '../../../Application_layer/utils/padding.dart';
+import '../dashboard_screens/bottom_navigation_screen.dart';
+import 'fifth_screen.dart';
+
+class ThirdScreen extends StatefulWidget {
+  const ThirdScreen({super.key});
 
   @override
-  State<FirstScreen> createState() => _FirstScreenState();
+  State<ThirdScreen> createState() => _ThirdScreenState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
+class _ThirdScreenState extends State<ThirdScreen> {
+
+
+  // Timer Declaration
+  int timer = 30;
+  Timer? _timer;
+  bool isTimer = false;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  void startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timerInstance) {
+      if (timer > 0) {
+        setState(() {
+          timer --;
+        });
+      } else {
+        _timer?.cancel();
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +66,6 @@ class _FirstScreenState extends State<FirstScreen> {
         padding: AppPadding.screenPadding,
         child: Column(
           children: [
-
             // Skip Button
             InkWell(
               onTap: (){
@@ -67,37 +96,56 @@ class _FirstScreenState extends State<FirstScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.flag, color: whiteColor,),
-                    SizedBox(width: 10,),
-                    text("Skip", textColor: whiteColor, fontSize: 16),
-                    SizedBox(width: 20,),
+                    Icon(Icons.flag, color: whiteColor),
+                    SizedBox(width: 10),
+                    text("EUR/USD", textColor: whiteColor, fontSize: 16),
+                    SizedBox(width: 20),
                     text("80%", textColor: buttonColor),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 40,),
+            SizedBox(height: 40),
 
             // Graph Alignment
             Image.asset(AppImages.graphImage),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
 
             // Trade Text
-            text("The chart shows price trends of asset - EUR/USD. If the chart goes up, the price rises. If it goes down, the price falls.", textColor: whiteColor, fontSize: 16, isCentered: true),
+            text(
+              "Trade in progress please wait for results",
+              textColor: whiteColor,
+              fontSize: 16,
+              isCentered: true,
+            ),
             SizedBox(height: 20,),
 
-
-            // Next button
+            timer == 0 ?
             ElevatedButton(
               onPressed: () {
-                Get.to(() => SecondScreen());
+                Get.to(FourthScreen());
               },
               style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
               child: text("Done", textColor: whiteColor),
+            ) : Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: buttonColor),
+              ),
+              child: Center(child: text("${timer}", textColor: whiteColor)),
             ),
           ],
         ),
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
 }

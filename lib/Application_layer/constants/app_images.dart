@@ -5,7 +5,7 @@ class AppImages {
 
   // Welcome screen
   static const String graphImage = "assets/images/trading_graph.png";
-  static const String welcome2 = "assets/images/heeelopinterest.jpeg";
+  static const String tradeVideo = "assets/images/trade_video.png";
   static const String welcome3 = "assets/images/payment.jpeg";
 
   // Ad Icon or premium Icon

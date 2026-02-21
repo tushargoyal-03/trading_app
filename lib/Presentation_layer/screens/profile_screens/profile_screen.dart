@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:trading_app/Presentation_layer/screens/profile_view/settings_screen.dart';
+import 'package:trading_app/Presentation_layer/screens/profile_screens/settings_screen.dart';
+import 'package:trading_app/Presentation_layer/screens/profile_screens/transaction_screen.dart';
+import 'package:trading_app/Presentation_layer/screens/profile_screens/view_profile_screen.dart';
 
 import '../../../Application_layer/constants/app_color.dart';
 import '../../../Application_layer/constants/app_font.dart';
@@ -42,6 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // user Profile
               Row(
                 children: [
                   Container(
@@ -56,17 +59,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      text("Vikash Pradhan",textColor: whiteColor,fontSize: 18,fontWeight: FontWeight.w600,
+                      text("User Profile",textColor: whiteColor,fontSize: 18,fontWeight: FontWeight.w600,
                           fontFamily: AppFontFamily.poppinsBold),
-                      text("9969969696",textColor: whiteColor,fontSize: 15,fontWeight: FontWeight.w400,
+                      text("0123456789",textColor: whiteColor,fontSize: 15,fontWeight: FontWeight.w400,
                           fontFamily: AppFontFamily.poppinsRegular),
-                      text("View Profile ",textColor: buttonColor,fontSize: 16,fontWeight: FontWeight.w600,
-                          fontFamily: AppFontFamily.poppinsBold),
+                      InkWell(
+                        onTap: (){
+                          Get.to(() => ViewProfileScreen());
+                        },
+                        child: text("View Profile ",textColor: buttonColor,fontSize: 16,fontWeight: FontWeight.w600,
+                            fontFamily: AppFontFamily.poppinsBold),
+                      ),
                     ],
                   ),
                 ],
               ),
               SizedBox(height: 30,),
+
+              // Balance
               Card(
                 color: whiteColor,
                 elevation: .5,
@@ -120,21 +130,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.monetization_on_outlined,color: buttonColor,),
+                              Icon(Icons.price_change,color: buttonColor,),
                               SizedBox(width: 20,),
-                              text("Transactions",textColor: blackColor,fontSize: 16,fontWeight: FontWeight.w500,
+                              text("Withdraw",textColor: blackColor,fontSize: 16,fontWeight: FontWeight.w500,
                                   fontFamily: AppFontFamily.poppinsSansMedium),
                             ],
                           ),
                           Icon(Icons.arrow_forward_ios_outlined,color: buttonColor,),
                         ],
                       ),
+                      SizedBox(height: 10,),
+                      Divider(thickness: 1,),
+                      InkWell(
+                        onTap: (){
+                          Get.to(() => TransactionScreen());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.monetization_on_outlined,color: buttonColor,),
+                                SizedBox(width: 20,),
+                                text("Transactions",textColor: blackColor,fontSize: 16,fontWeight: FontWeight.w500,
+                                    fontFamily: AppFontFamily.poppinsSansMedium),
+                              ],
+                            ),
+                            Icon(Icons.arrow_forward_ios_outlined,color: buttonColor,),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
-
               SizedBox(height: 30,),
+
+              // About
               Card(
                 color: whiteColor,
                 elevation: .5,
@@ -191,9 +224,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Icon(Icons.arrow_forward_ios_outlined,color: buttonColor,),
                         ],
                       ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 30,),
 
+              // Notification
+              Card(
+                color: whiteColor,
+                elevation: .5,
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.watch_later,color: buttonColor,),
+                              SizedBox(width: 20,),
+                              text("Notification",textColor: blackColor,fontSize: 16,fontWeight: FontWeight.w500,
+                                  fontFamily: AppFontFamily.poppinsSansMedium),
+                            ],
+                          ),
+                          Icon(Icons.arrow_forward_ios_outlined,color: buttonColor,),
+                        ],
+                      ),
                       SizedBox(height: 10,),
                       Divider(thickness: 1,),
+
                       InkWell(
                         onTap: (){
                           Get.to(SettingsScreen());
@@ -218,9 +280,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-
-
               SizedBox(height: 20,),
+
+              // Logout
               Container(
                 width: MediaQuery.sizeOf(context).width,
                 padding: EdgeInsets.symmetric(vertical: 10),
@@ -239,7 +301,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
 
-              )
+              ),
             ],
           ),
         ),
