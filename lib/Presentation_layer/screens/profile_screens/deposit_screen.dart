@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:trading_app/Presentation_layer/screens/auth_screens/login_screen.dart';
 
 import '../../../Application_layer/constants/app_color.dart';
 import '../../../Application_layer/constants/app_font.dart';
@@ -192,7 +193,9 @@ class _DepositScreenState extends State<DepositScreen> {
                         BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => LoginScreen());
+                    },
                     child:  text(
                       "Open real account and deposit",
                       textColor: whiteColor,fontFamily: AppFontFamily.poppinsBold,

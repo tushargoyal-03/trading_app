@@ -11,6 +11,9 @@ class AppImages {
   // Ad Icon or premium Icon
   static const String adIcon = "assets/images/banner.png";
 
+  // Pancard Image
+  static const String panCardImage = "assets/images/pancard.jpeg";
+
   // Tools Icon
   static const String loginPosterImage = "assets/images/iPad.jpeg";
   static const String profileImage = "assets/images/elite_profile_image.jpg";

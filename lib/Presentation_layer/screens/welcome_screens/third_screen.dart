@@ -49,94 +49,97 @@ class _ThirdScreenState extends State<ThirdScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: bgColor,
-      appBar: AppBar(
-        centerTitle: true,
+    return SafeArea(
+      top: false,
+      child: Scaffold(
         backgroundColor: bgColor,
-        title: text(
-          "How to trade",
-          textColor: whiteColor,
-          fontWeight: FontWeight.w600,
-          fontFamily: AppFontFamily.poppinsBold,
-          fontSize: 22,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: bgColor,
+          title: text(
+            "How to trade",
+            textColor: whiteColor,
+            fontWeight: FontWeight.w600,
+            fontFamily: AppFontFamily.poppinsBold,
+            fontSize: 22,
+          ),
         ),
-      ),
-      body: Padding(
-        padding: AppPadding.screenPadding,
-        child: Column(
-          children: [
-            // Skip Button
-            InkWell(
-              onTap: (){
-                Get.to(BottomNavigationScreen());
-              },
-              child: Align(
-                alignment: Alignment.topRight,
+        body: Padding(
+          padding: AppPadding.screenPadding,
+          child: Column(
+            children: [
+              // Skip Button
+              InkWell(
+                onTap: (){
+                  Get.to(BottomNavigationScreen());
+                },
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    padding: AppPadding.loginContainerPadding,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(21),
+                      border: Border.all(color: whiteColor, width: 2),
+                    ),
+                    child: text("Skip", textColor: whiteColor),
+                  ),
+                ),
+              ),
+      
+              // Trade Details
+              Align(
+                alignment: Alignment.topLeft,
                 child: Container(
                   padding: AppPadding.loginContainerPadding,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(21),
+                    borderRadius: BorderRadius.circular(11),
                     border: Border.all(color: whiteColor, width: 2),
                   ),
-                  child: text("Skip", textColor: whiteColor),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.flag, color: whiteColor),
+                      SizedBox(width: 10),
+                      text("EUR/USD", textColor: whiteColor, fontSize: 16),
+                      SizedBox(width: 20),
+                      text("80%", textColor: buttonColor),
+                    ],
+                  ),
                 ),
               ),
-            ),
-
-            // Trade Details
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                padding: AppPadding.loginContainerPadding,
+              SizedBox(height: 40),
+      
+              // Graph Alignment
+              Image.asset(AppImages.graphImage),
+              SizedBox(height: 20),
+      
+              // Trade Text
+              text(
+                "Trade in progress please wait for results",
+                textColor: whiteColor,
+                fontSize: 16,
+                isCentered: true,
+              ),
+              SizedBox(height: 20,),
+      
+              timer == 0 ?
+              ElevatedButton(
+                onPressed: () {
+                  Get.to(FourthScreen());
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
+                child: text("Done", textColor: whiteColor),
+              ) : Container(
+                height: 50,
+                width: 50,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(11),
-                  border: Border.all(color: whiteColor, width: 2),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: buttonColor),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.flag, color: whiteColor),
-                    SizedBox(width: 10),
-                    text("EUR/USD", textColor: whiteColor, fontSize: 16),
-                    SizedBox(width: 20),
-                    text("80%", textColor: buttonColor),
-                  ],
-                ),
+                child: Center(child: text("${timer}", textColor: whiteColor)),
               ),
-            ),
-            SizedBox(height: 40),
-
-            // Graph Alignment
-            Image.asset(AppImages.graphImage),
-            SizedBox(height: 20),
-
-            // Trade Text
-            text(
-              "Trade in progress please wait for results",
-              textColor: whiteColor,
-              fontSize: 16,
-              isCentered: true,
-            ),
-            SizedBox(height: 20,),
-
-            timer == 0 ?
-            ElevatedButton(
-              onPressed: () {
-                Get.to(FourthScreen());
-              },
-              style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
-              child: text("Done", textColor: whiteColor),
-            ) : Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: buttonColor),
-              ),
-              child: Center(child: text("${timer}", textColor: whiteColor)),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

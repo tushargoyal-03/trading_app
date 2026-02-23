@@ -56,11 +56,11 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: BorderSide(color: iconColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: bgColor, width: 3),
+          borderSide: BorderSide(color: iconColor, width: 1),
         ),
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
